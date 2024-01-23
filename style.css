@@ -1,0 +1,51 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: bisque;
+}
+
+header {
+    background-color: coral;
+    padding: 40px 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    max-width: 400px;
+    gap: 5px;
+    background-color: rgb(207, 229, 230);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px auto;
+}
+
+form button {
+    max-width: 100px;
+}
+
+
+.grid-card-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    padding: 20px;
+}
+
+.cards-container {
+    background-color: burlywood;
+    padding: 10px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.cards-container img {
+    width: 100%;
+}
