@@ -14,8 +14,9 @@ document.addEventListener("DOMContentLoaded", function () {
 submitEl.addEventListener("click", (event) => {
     event.preventDefault();
 
-    // Membuat objek untuk wishlist
+    // Membuat objek untuk wishlist dengan id unik
     const wishlistItem = {
+        id: new Date().getTime(), // Gunakan timestamp sebagai id unik
         name: destName.value,
         location: destLocation.value,
         photo: destPhoto.value || "https://asset.kompas.com/crops/BvFN9Z9CJi3umL6FS_TFXBkehG0=/0x15:977x667/750x500/data/photo/2020/01/05/5e11aed43e19f.jpg",
@@ -92,7 +93,8 @@ function displayWishlist(wishlistItem) {
     const removeButton = document.createElement("button");
     removeButton.textContent = "Remove";
     removeButton.addEventListener("click", function () {
-        removeWishlistItem(wishlistItem, cardsContainer);
+        removeWishlistItem(wishlistItem);
+        cardsContainer.remove();
     });
     card.appendChild(removeButton);
 
@@ -102,23 +104,16 @@ function displayWishlist(wishlistItem) {
 }
 
 // Fungsi untuk menghapus item wishlist dari localStorage
-function removeWishlistItem(wishlistItem, cardsContainer) {
+function removeWishlistItem(wishlistItem) {
     // Periksa apakah localStorage didukung oleh browser
     if (typeof (Storage) !== "undefined") {
         // Ambil data wishlist yang sudah ada atau inisialisasi array kosong
         const existingWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
 
         // Filter wishlistItem yang akan dihapus
-        const updatedWishlist = existingWishlist.filter(item => item !== wishlistItem);
+        const updatedWishlist = existingWishlist.filter(item => item.id !== wishlistItem.id);
 
         // Simpan array wishlist yang telah diperbarui kembali ke localStorage
         localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
 
-        console.log("Item wishlist dihapus dari localStorage");
-
-        // Hapus elemen dari tampilan
-        cardsContainer.remove();
-    } else {
-        console.log("Browser Anda tidak mendukung localStorage");
-    }
-}
+        console.log
