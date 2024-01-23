@@ -1,9 +1,8 @@
-//ELEMENT VARIABLES
+// ELEMENT VARIABLES
 const destName = document.querySelector("#name");
 const destLocation = document.getElementById("location");
 const destPhoto = document.getElementById("photo");
 const destDesc = document.getElementById("description");
-const destRemove = document.createElement("button");
 const gridContainer = document.querySelector(".grid-card-container");
 const submitEl = document.querySelector("#save");
 
@@ -28,8 +27,6 @@ submitEl.addEventListener("click", (event) => {
 
     // Menampilkan wishlist
     displayWishlist(wishlistItem);
-
-    console.log("HELLO CLICKEDX");
 });
 
 // Fungsi untuk menyimpan wishlist ke localStorage
@@ -107,8 +104,19 @@ function displayWishlist(wishlistItem) {
 
 // Fungsi untuk menghapus item wishlist dari localStorage
 function removeWishlistItem(wishlistItem) {
-    const existingWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-    const updatedWishlist = existingWishlist.filter(item => item !== wishlistItem);
-    localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
-    console.log("Item wishlist dihapus dari localStorage");
+    // Periksa apakah localStorage didukung oleh browser
+    if (typeof (Storage) !== "undefined") {
+        // Ambil data wishlist yang sudah ada atau inisialisasi array kosong
+        const existingWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+        // Filter wishlistItem yang akan dihapus
+        const updatedWishlist = existingWishlist.filter(item => item !== wishlistItem);
+
+        // Simpan array wishlist yang telah diperbarui kembali ke localStorage
+        localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
+
+        console.log("Item wishlist dihapus dari localStorage");
+    } else {
+        console.log("Browser Anda tidak mendukung localStorage");
+    }
 }
