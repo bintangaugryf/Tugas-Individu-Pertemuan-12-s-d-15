@@ -116,6 +116,10 @@ function removeWishlistItem(wishlistItem) {
         localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
 
         console.log("Item wishlist dihapus dari localStorage");
+
+        // Perbarui tampilan setelah menghapus item
+        gridContainer.innerHTML = "";
+        updatedWishlist.forEach(displayWishlist);
     } else {
         console.log("Browser Anda tidak mendukung localStorage");
     }
