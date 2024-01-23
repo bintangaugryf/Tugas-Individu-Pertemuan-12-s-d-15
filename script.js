@@ -92,8 +92,7 @@ function displayWishlist(wishlistItem) {
     const removeButton = document.createElement("button");
     removeButton.textContent = "Remove";
     removeButton.addEventListener("click", function () {
-        removeWishlistItem(wishlistItem);
-        cardsContainer.remove();
+        removeWishlistItem(wishlistItem, cardsContainer);
     });
     card.appendChild(removeButton);
 
@@ -103,7 +102,7 @@ function displayWishlist(wishlistItem) {
 }
 
 // Fungsi untuk menghapus item wishlist dari localStorage
-function removeWishlistItem(wishlistItem) {
+function removeWishlistItem(wishlistItem, cardsContainer) {
     // Periksa apakah localStorage didukung oleh browser
     if (typeof (Storage) !== "undefined") {
         // Ambil data wishlist yang sudah ada atau inisialisasi array kosong
@@ -117,9 +116,8 @@ function removeWishlistItem(wishlistItem) {
 
         console.log("Item wishlist dihapus dari localStorage");
 
-        // Perbarui tampilan setelah menghapus item
-        gridContainer.innerHTML = "";
-        updatedWishlist.forEach(displayWishlist);
+        // Hapus elemen dari tampilan
+        cardsContainer.remove();
     } else {
         console.log("Browser Anda tidak mendukung localStorage");
     }
